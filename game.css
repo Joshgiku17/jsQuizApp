@@ -30,3 +30,30 @@
 .incorrect{
     background-color: #dc3545;
 }
+/* HEADS UP DISPLAY */
+#hud{
+    display: flex;
+    justify-content: space-between;
+}
+.hud-prefix{
+    text-align: center;
+    font-size: 2rem;
+
+}
+.hud-main-text{
+    text-align: center;
+}
+
+/* progress bar */
+#progressBar{
+    width: 20rem;
+    height: 4rem;
+    border: 0.4rem solid #56a5eb;
+    outline: none;
+    margin-top: 1.5rem;
+}
+#progress-bar-full{
+    height: 3.4rem;
+    background-color: #56a5eb;
+    width: 0%;
+}

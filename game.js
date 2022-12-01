@@ -3,6 +3,9 @@ const choice=Array.from(document.getElementsByClassName('choice-text'));
 let currentQuestion={};
 let acceptingAnswers=false;/*This is the delay to accept the answer💡*/
 let score=0;
+const progressText=document.getElementById('progressText');
+const scoreText=document.getElementById('score');
+const progressBarFull=document.getElementById('progress-bar-full');
 let questionCounter=0;
 let availableQuestion=[];/* a copy of 4 question set to be used to provide a unique question for a user */
 let questions =[
@@ -50,6 +53,13 @@ getNewQuestion=()=>{
         return window.location.assign("/end.html");
     }
     questionCounter++;
+    progressText.innerText= 'Question '+questionCounter+ '/' + MAX_QUESTIONS;
+    //update the progress bar
+    
+    progressBarFull.style.width =`${(questionCounter / MAX_QUESTIONS)*100}%`;
+    /In this syntax above, the % represents that the value should be in percentage. not pixels/ 
+
+
     //this Math.floor(Math.random()*3) is used to get a random integer basing on the length of the availableQuestion[]
     const questionIndex=Math.floor(Math.random()  *availableQuestion.length);
     currentQuestion= availableQuestion[questionIndex];//I'm alittle confused here.😒 //this is the position of a random question ✔✔
@@ -71,12 +81,23 @@ choice.forEach(choice=>{
         const selectedAnswer=selectedChoice.dataset['gikundiro'];
         //then create a variable to display whether the answer is correct or incorrect
         const classToApply= selectedAnswer==currentQuestion.answer ? 'correct':'incorrect'; 
+        if(classToApply==='correct'){
+             incrementScore(CORRECT_BONUS);
+        }
         //👇🏾👇🏾👇🏾is to get the container element//apply class in js using classList.
         selectedChoice.parentElement.classList.add(classToApply);
-        
-        getNewQuestion();
+        setTimeout( ()=>{
+            selectedChoice.parentElement.classList.remove(classToApply);
+            getNewQuestion();
+
+        },1000);
+
     })
 }
     )
 // getNewQuestion()
+incrementScore= num=>{
+    score+=num;
+    scoreText.innerText=score;
+}
 startgame()
