@@ -50,6 +50,7 @@ startgame =()=>{
 getNewQuestion=()=>{
     if(availableQuestion.length===0 || questionCounter>= MAX_QUESTIONS){
         //REDIRECT TO THE END PAGE
+        localStorage.setItem("mostRecentScore",score); //👈🏾👈🏾 saves the score 
         return window.location.assign("/end.html");
     }
     questionCounter++;
